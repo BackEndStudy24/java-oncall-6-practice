@@ -60,6 +60,5 @@ public class Controller {
     private void print_Calendar(int month) {
         int day = MonthType.checkedDay(month);
         OutputView.outputCalendar(month, day);
-
     }
 }

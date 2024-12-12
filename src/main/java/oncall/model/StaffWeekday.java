@@ -1,6 +1,6 @@
 package oncall.model;
 
-import oncall.constants.WeekType;
+import oncall.constants.WorkingType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class StaffWeekday {
 
     public void inputWeekDayStaffs(List<String> staffs) {
         for (String staff : staffs) {
-            weekDayStaffs.add(new Staff(staff, WeekType.WEEKDAY));
+            weekDayStaffs.add(new Staff(staff, WorkingType.WEEKDAY));
         }
     }
 

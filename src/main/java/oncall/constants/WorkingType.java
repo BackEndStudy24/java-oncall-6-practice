@@ -1,13 +1,13 @@
 package oncall.constants;
 
-public enum WeekType {
+public enum WorkingType {
 
     WEEKDAY(0),
     HOLIDAY(1);
 
     private final int type;
 
-    WeekType(int type) {
+    WorkingType(int type) {
         this.type = type;
     }
 

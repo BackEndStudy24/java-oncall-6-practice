@@ -1,13 +1,13 @@
 package oncall.model;
 
-import oncall.constants.WeekType;
+import oncall.constants.WorkingType;
 
 public class Staff {
 
     private String name;
-    private WeekType weekType;
+    private WorkingType weekType;
 
-    public Staff(String name, WeekType weekType) {
+    public Staff(String name, WorkingType weekType) {
         this.name = name;
         this.weekType = weekType;
     }
@@ -16,7 +16,7 @@ public class Staff {
         return name;
     }
 
-    public WeekType getWeekType() {
+    public WorkingType getWeekType() {
         return weekType;
     }
 }

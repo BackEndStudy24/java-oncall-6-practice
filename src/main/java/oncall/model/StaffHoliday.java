@@ -1,6 +1,6 @@
 package oncall.model;
 
-import oncall.constants.WeekType;
+import oncall.constants.WorkingType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ public class StaffHoliday {
 
     public void inputHolidayStaffs(List<String> staffs) {
         for (String staff : staffs) {
-            holidayStaffs.add(new Staff(staff, WeekType.HOLIDAY));
+            holidayStaffs.add(new Staff(staff, WorkingType.HOLIDAY));
         }
     }
 
