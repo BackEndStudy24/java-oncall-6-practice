@@ -10,10 +10,6 @@ public class InputView {
 
     private static final String COMMA = ",";
 
-    public static String[] getMonthDay(String input) {
-        return input.split(COMMA);
-    }
-
     public static List<String> getStringsUsingDelimiter() {
         String input = Console.readLine();
         ServiceValidation.validateNull(input);

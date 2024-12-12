@@ -25,14 +25,14 @@ public enum MonthType {
         this.day = day;
     }
 
-    public static MonthType checkedDay(int month) {
+    public static int checkedDay(int month) {
         MonthType[] monthTypes = MonthType.values();
-        for(int i = 0; i <monthTypes.length; i++ ) {
-            if(monthTypes[i].day == month) {
-                return monthTypes[i];
+        for (MonthType monthType : monthTypes) {
+            if (monthType.month == month) {
+                return monthType.day;
             }
         }
-        return null;
+        return 0;
     }
 
 
