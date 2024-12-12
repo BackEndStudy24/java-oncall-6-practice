@@ -18,14 +18,14 @@ public enum HolidayType {
         this.holiday = holiday;
     }
 
-    public static WorkingType checkedHoliday(String calendar) {
+    public static boolean checkedHoliday(String calendar) {
         HolidayType[] holidays = HolidayType.values();
         for(HolidayType holidayType : holidays) {
             if(calendar.contains(holidayType.holiday)) {
-                return WorkingType.HOLIDAY;
+                return true;
             }
         }
-        return WorkingType.WEEKDAY;
+        return false;
     }
 
     public String getHoliday() {

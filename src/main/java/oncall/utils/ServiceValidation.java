@@ -77,7 +77,7 @@ public class ServiceValidation {
 
         Set<String> setStaffs = new HashSet<>(addStaffs);
 
-        if(((weekdayStaffs.size() + holidayStaffs.size() / 2.0 ) != setStaffs.size() * 10 / 10.0)) {
+        if((((weekdayStaffs.size() + holidayStaffs.size())/2.0) != setStaffs.size() * 10 / 10.0)) {
             throw new IllegalArgumentException(ErrorMessageType.ERROR_EMPLOYEE_STAFF_WORK.getMessage());
         }
     }

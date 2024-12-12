@@ -4,27 +4,67 @@ import oncall.constants.HolidayType;
 import oncall.constants.WeekType;
 import oncall.constants.WorkingType;
 
+import java.util.List;
+
 public class StartDay {
 
     private int month;
     private String strDay;
+    private final StaffWeekday weekday;
+    private final StaffHoliday holiday;
+
+
+
+    public StartDay(StaffHoliday holiday, StaffWeekday weekday) {
+        this.holiday = holiday;
+        this.weekday = weekday;
+    }
 
     public void outputCalendar(int month, int finalDay) {
+        int holidayCount = 0;
+        int weekDayCount = 0;
 
-        for(int i = 1; i <= finalDay; i++ ){
-            String strDay = getWeekTypeStrDay(i);
+        for (int i = 1; i <= finalDay; i++) {
+            String strDay = getWeekTypeStrDay(i); // 이게 만약 토 , 일 이거나 /
+
             String output = String.format("%d월 %d일 %s\n", month, i, strDay);
-            if(HolidayType.checkedHoliday(output)== (WorkingType.HOLIDAY)) {
-                System.out.printf("%d월 %d일 %s(휴일)\n", month, i, strDay);
-            } else {
-                System.out.print(output);
+            boolean hasHoliday = HolidayType.checkedHoliday(output);
+
+            if (hasHoliday) { // 휴일이거나
+                System.out.printf("%d월 %d일 %s(휴일) %s\n", month, i, strDay, getHolidayStaffsName(holidayCount));
+                holidayCount++;
             }
+            if (strDay.equals("토") || strDay.equals("일") && !hasHoliday) { // 토, 일 인데 휴일이 아니거나
+                System.out.printf("%d월 %d일 %s %s\n", month, i, strDay, getHolidayStaffsName(holidayCount));
+                holidayCount++;
+            }
+            if (!strDay.equals("토") && !strDay.equals("일") && !hasHoliday) {
+                System.out.printf("%d월 %d일 %s %s\n", month, i, strDay, getWeekDayStaffsName(weekDayCount));
+                weekDayCount++;
+            }
+
+
         }
+
+    }
+
+    public String getWeekDayStaffsName(int day) {
+        List<String> staffs = weekday.getWeekDayStaffs();
+
+        return staffs.get(day % staffs.size());
+
+    }
+
+    public String getHolidayStaffsName(int day) {
+        List<String> staffs = holiday.getHolidayStaffs();
+
+        return staffs.get(day % staffs.size());
+
     }
 
     private String getWeekTypeStrDay(int nextDay) {
         int day = WeekType.checkedWeekInt(strDay);
-        return WeekType.checkedWeek(day+nextDay-1);
+        return WeekType.checkedWeek(day + nextDay - 1);
     }
 
     public void setMonth(int month) {

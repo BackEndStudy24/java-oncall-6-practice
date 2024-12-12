@@ -16,11 +16,18 @@ public class StaffHoliday {
         }
     }
 
-    public List<String> getHolidayStaffs() {
+    public List<String> getHolidayStaffsSize() {
         return holidayStaffs
                 .stream()
                 .map(Staff::getName)
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public List<String> getHolidayStaffs() {
+        return holidayStaffs
+                .stream()
+                .map(Staff::getName)
+                .toList();
     }
 
 }

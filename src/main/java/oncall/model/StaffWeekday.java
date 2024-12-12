@@ -17,11 +17,18 @@ public class StaffWeekday {
         }
     }
 
-    public List<String> getWeekDayStaffs() {
+    public List<String> getWeekDayStaffsSize() {
         return weekDayStaffs
                 .stream()
                 .map(Staff::getName)
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public List<String> getWeekDayStaffs() {
+        return weekDayStaffs
+                .stream()
+                .map(Staff::getName)
+                .toList();
     }
 
 }

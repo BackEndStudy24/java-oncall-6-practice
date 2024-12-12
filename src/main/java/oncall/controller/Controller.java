@@ -11,14 +11,14 @@ import java.util.List;
 
 public class Controller {
 
-    final StartDay startDay= new StartDay();
     final StaffHoliday staffHoliday = new StaffHoliday();
     final StaffWeekday staffWeekday = new StaffWeekday();
+    final StartDay startDay= new StartDay(staffHoliday, staffWeekday);
 
     public void start() {
         clientInput_Month_Day();
-//        clientInput_WeekDayStaff();
-//        clientInput_HolidayStaff();
+        clientInput_WeekDayStaff();
+        clientInput_HolidayStaff();
 
         print_Calendar(startDay.getMonth());
 
@@ -52,7 +52,7 @@ public class Controller {
 
         staffHoliday.inputHolidayStaffs(holidayStaffs);
 
-        ServiceValidation.validateStaffTwoTimes(staffWeekday.getWeekDayStaffs(), staffHoliday.getHolidayStaffs());
+        ServiceValidation.validateStaffTwoTimes(staffWeekday.getWeekDayStaffsSize(), staffHoliday.getHolidayStaffsSize());
 
     }
 
