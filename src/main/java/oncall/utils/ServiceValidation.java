@@ -41,20 +41,28 @@ public class ServiceValidation {
         return input;
     }
 
-    public static void validateDuplicateName(List<String> names) {
-        Set<String> setNames = new HashSet<>(names);
-        if(setNames.size() != names.size()) {
+    public static void validateStaffs(List<String> staffs) {
+        validateDuplicateName(staffs);
+        validateNameLength(staffs);
+        validateMinimumStaff(staffs);
+    }
+
+    private static void validateDuplicateName(List<String> staffs) {
+        Set<String> setStaffs = new HashSet<>(staffs);
+        if(setStaffs.size() != staffs.size()) {
             throw new IllegalArgumentException(ErrorMessageType.ERROR_DUPLICATE_NAME.getMessage());
         }
     }
 
-    public static void validateNameLength(String input) {
-        if(input.length() > 5 ) {
-            throw new IllegalArgumentException(ErrorMessageType.ERROR_NAME_LENGTH.getMessage());
+    private static void validateNameLength(List<String> staffs) {
+        for(String staff : staffs) {
+            if (staff.length() > 5) {
+                throw new IllegalArgumentException(ErrorMessageType.ERROR_NAME_LENGTH.getMessage());
+            }
         }
     }
 
-    public static void validateMinimumStaff(List<String> staffs) {
+    private static void validateMinimumStaff(List<String> staffs) {
         if (staffs.size() < 5 || staffs.size() > 35) {
             throw new IllegalArgumentException(ErrorMessageType.ERROR_EMPLOYEE_STAFF.getMessage());
         }
