@@ -26,8 +26,14 @@ public class ServiceValidation {
     }
 
     public static void validateNegativeNumber(int day) {
-        if(day < 1 || day > 12) {
+        if (day < 1 || day > 12) {
             throw new IllegalArgumentException(ErrorMessageType.ERROR_NUMBER_FORMAT_ERROR.getMessage());
+        }
+    }
+
+    public static void validateDayOfTheWeek(String input) {
+        if (input.equals("월") || input.equals("화") || input.equals("수") || input.equals("목") || input.equals("금") || input.equals("토") || input.equals("일")) {
+            throw new IllegalArgumentException(ErrorMessageType.ERROR_DAY_OF_THE_WEEK.getMessage());
         }
     }
 
