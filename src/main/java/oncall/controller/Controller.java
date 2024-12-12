@@ -1,6 +1,8 @@
 package oncall.controller;
 
 import oncall.constants.MonthType;
+import oncall.model.StaffHoliday;
+import oncall.model.StaffWeekday;
 import oncall.model.StartDay;
 import oncall.utils.ServiceValidation;
 import oncall.view.InputView;
@@ -11,6 +13,8 @@ import java.util.List;
 public class Controller {
 
     final StartDay startDay= new StartDay();
+    final StaffHoliday staffHoliday = new StaffHoliday();
+    final StaffWeekday staffWeekday = new StaffWeekday();
 
     public void start() {
         clientInput_Month_Day();
@@ -38,16 +42,24 @@ public class Controller {
         System.out.print("평일 비상 근무 순번대로 사원 닉네임을 입력하세요> ");
         List<String> weekDayStaffs = InputView.getStringsUsingDelimiter();
         ServiceValidation.validateStaffs(weekDayStaffs);
+
+        staffWeekday.inputWeekDayStaffs(weekDayStaffs);
     }
 
     private void clientInput_HolidayStaff() {
         System.out.print("휴일 비상 근무 순번대로 사원 닉네임을 입력하세요> ");
         List<String> holidayStaffs = InputView.getStringsUsingDelimiter();
         ServiceValidation.validateStaffs(holidayStaffs);
+
+        staffHoliday.inputHolidayStaffs(holidayStaffs);
+
+        ServiceValidation.validateStaffTwoTimes(staffWeekday.getWeekDayStaffs(), staffHoliday.getHolidayStaffs());
+
     }
 
     private void print_Calendar(int month) {
         int day = MonthType.checkedDay(month);
         OutputView.outputCalendar(month, day);
+
     }
 }

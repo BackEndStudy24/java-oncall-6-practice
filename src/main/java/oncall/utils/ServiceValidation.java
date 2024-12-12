@@ -1,7 +1,9 @@
 package oncall.utils;
 
 import oncall.constants.ErrorMessageType;
+import oncall.model.Staff;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -65,6 +67,18 @@ public class ServiceValidation {
     private static void validateMinimumStaff(List<String> staffs) {
         if (staffs.size() < 5 || staffs.size() > 35) {
             throw new IllegalArgumentException(ErrorMessageType.ERROR_EMPLOYEE_STAFF.getMessage());
+        }
+    }
+
+    public static void validateStaffTwoTimes(List<String> weekdayStaffs, List<String> holidayStaffs) {
+        List<String> addStaffs = new ArrayList<>();
+        addStaffs.addAll(weekdayStaffs);
+        addStaffs.addAll(holidayStaffs);
+
+        Set<String> setStaffs = new HashSet<>(addStaffs);
+
+        if(((weekdayStaffs.size() + holidayStaffs.size() / 2.0 ) != setStaffs.size() * 10 / 10.0)) {
+            throw new IllegalArgumentException(ErrorMessageType.ERROR_EMPLOYEE_STAFF_WORK.getMessage());
         }
     }
 

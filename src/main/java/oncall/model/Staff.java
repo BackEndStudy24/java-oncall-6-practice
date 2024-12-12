@@ -12,4 +12,11 @@ public class Staff {
         this.weekType = weekType;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public WeekType getWeekType() {
+        return weekType;
+    }
 }
