@@ -6,7 +6,6 @@ import oncall.model.StaffWeekday;
 import oncall.model.StartDay;
 import oncall.utils.ServiceValidation;
 import oncall.view.InputView;
-import oncall.view.OutputView;
 
 import java.util.List;
 
@@ -18,8 +17,8 @@ public class Controller {
 
     public void start() {
         clientInput_Month_Day();
-        clientInput_WeekDayStaff();
-        clientInput_HolidayStaff();
+//        clientInput_WeekDayStaff();
+//        clientInput_HolidayStaff();
 
         print_Calendar(startDay.getMonth());
 
@@ -59,6 +58,7 @@ public class Controller {
 
     private void print_Calendar(int month) {
         int day = MonthType.checkedDay(month);
-        OutputView.outputCalendar(month, day);
+
+        startDay.outputCalendar(month, day);
     }
 }

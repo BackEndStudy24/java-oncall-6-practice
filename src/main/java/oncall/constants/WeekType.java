@@ -18,6 +18,16 @@ public enum WeekType {
         this.day = day;
     }
 
+    public static int checkedWeekInt(String strDay) {
+        WeekType[] weekTypes = WeekType.values();
+        for(WeekType weekType : weekTypes) {
+            if(weekType.strDay.equals(strDay)) {
+                return weekType.day;
+            }
+        }
+        return -1;
+    }
+
     public static String checkedWeek(int day) {
         WeekType[] weekTypes = WeekType.values();
         for(WeekType weekType : weekTypes)  {
