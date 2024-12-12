@@ -53,4 +53,10 @@ public class ServiceValidation {
         }
     }
 
+    public static void validateMinimumStaff(List<String> staffs) {
+        if (staffs.size() < 5 || staffs.size() > 35) {
+            throw new IllegalArgumentException(ErrorMessageType.ERROR_EMPLOYEE_STAFF.getMessage());
+        }
+    }
+
 }
