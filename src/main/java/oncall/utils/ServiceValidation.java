@@ -47,4 +47,10 @@ public class ServiceValidation {
         }
     }
 
+    public static void validateNameLength(String input) {
+        if(input.length() > 5 ) {
+            throw new IllegalArgumentException(ErrorMessageType.ERROR_NAME_LENGTH.getMessage());
+        }
+    }
+
 }
