@@ -2,6 +2,9 @@ package oncall.utils;
 
 import oncall.constants.ErrorMessageType;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class ServiceValidation {
@@ -34,6 +37,13 @@ public class ServiceValidation {
     public static void validateDayOfTheWeek(String input) {
         if (input.equals("월") || input.equals("화") || input.equals("수") || input.equals("목") || input.equals("금") || input.equals("토") || input.equals("일")) {
             throw new IllegalArgumentException(ErrorMessageType.ERROR_DAY_OF_THE_WEEK.getMessage());
+        }
+    }
+
+    public static void validateDuplicateName(List<String> names) {
+        Set<String> setNames = new HashSet<>(names);
+        if(setNames.size() != names.size()) {
+            throw new IllegalArgumentException(ErrorMessageType.ERROR_DUPLICATE_NAME.getMessage());
         }
     }
 
