@@ -31,4 +31,8 @@ public class StaffWeekday {
                 .toList();
     }
 
+    public void clearWeekdayStaffs() {
+        this.weekDayStaffs.clear();
+    }
+
 }

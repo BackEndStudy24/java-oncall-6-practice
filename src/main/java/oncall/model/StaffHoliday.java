@@ -30,4 +30,8 @@ public class StaffHoliday {
                 .toList();
     }
 
+    public void clearHolidayStaffs() {
+        this.holidayStaffs.clear();
+    }
+
 }

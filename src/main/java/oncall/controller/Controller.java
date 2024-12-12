@@ -13,16 +13,34 @@ public class Controller {
 
     final StaffHoliday staffHoliday = new StaffHoliday();
     final StaffWeekday staffWeekday = new StaffWeekday();
-    final StartDay startDay= new StartDay(staffHoliday, staffWeekday);
+    final StartDay startDay = new StartDay(staffHoliday, staffWeekday);
 
     public void start() {
-        clientInput_Month_Day();
-        clientInput_WeekDayStaff();
-        clientInput_HolidayStaff();
+
+        runWithRetry(this::clientInput_Month_Day); // 메서드1
+
+        boolean completed = false;
+        while (!completed) {
+            try {
+                resetStaffInputs();
+                clientInput_WeekDayStaff();
+                clientInput_HolidayStaff();
+                completed = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
         print_Calendar(startDay.getMonth());
 
     }
+
+    private void resetStaffInputs() {
+        // 오류 발생 시 StaffWeekday와 StaffHoliday 초기화
+        staffWeekday.clearWeekdayStaffs();
+        staffHoliday.clearHolidayStaffs();
+    }
+
 
     private void clientInput_Month_Day() {
         System.out.print("비상 근무를 배정할 월과 시작 요일을 입력하세요> ");
@@ -41,7 +59,6 @@ public class Controller {
         System.out.print("평일 비상 근무 순번대로 사원 닉네임을 입력하세요> ");
         List<String> weekDayStaffs = InputView.getStringsUsingDelimiter();
         ServiceValidation.validateStaffs(weekDayStaffs);
-
         staffWeekday.inputWeekDayStaffs(weekDayStaffs);
     }
 
@@ -49,9 +66,7 @@ public class Controller {
         System.out.print("휴일 비상 근무 순번대로 사원 닉네임을 입력하세요> ");
         List<String> holidayStaffs = InputView.getStringsUsingDelimiter();
         ServiceValidation.validateStaffs(holidayStaffs);
-
         staffHoliday.inputHolidayStaffs(holidayStaffs);
-
         ServiceValidation.validateStaffTwoTimes(staffWeekday.getWeekDayStaffsSize(), staffHoliday.getHolidayStaffsSize());
 
     }
@@ -61,4 +76,17 @@ public class Controller {
 
         startDay.outputCalendar(month, day);
     }
+
+    private void runWithRetry(Runnable serviceMethod) {
+        boolean success = false;
+        while (!success) {
+            try {
+                serviceMethod.run();
+                success = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
 }

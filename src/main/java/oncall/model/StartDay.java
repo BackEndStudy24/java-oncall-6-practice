@@ -2,7 +2,6 @@ package oncall.model;
 
 import oncall.constants.HolidayType;
 import oncall.constants.WeekType;
-import oncall.constants.WorkingType;
 
 import java.util.List;
 
@@ -12,7 +11,6 @@ public class StartDay {
     private String strDay;
     private final StaffWeekday weekday;
     private final StaffHoliday holiday;
-
 
 
     public StartDay(StaffHoliday holiday, StaffWeekday weekday) {
@@ -30,16 +28,20 @@ public class StartDay {
             String output = String.format("%d월 %d일 %s\n", month, i, strDay);
             boolean hasHoliday = HolidayType.checkedHoliday(output);
 
-            if (hasHoliday) { // 휴일이거나
-                System.out.printf("%d월 %d일 %s(휴일) %s\n", month, i, strDay, getHolidayStaffsName(holidayCount));
+            String holidayStaff = getHolidayStaffsName(holidayCount);
+            String weekdayStaff = getWeekDayStaffsName(weekDayCount);
+
+
+            if (hasHoliday) {
+                System.out.printf("%d월 %d일 %s(휴일) %s\n", month, i, strDay, holidayStaff);
                 holidayCount++;
             }
             if (strDay.equals("토") || strDay.equals("일") && !hasHoliday) { // 토, 일 인데 휴일이 아니거나
-                System.out.printf("%d월 %d일 %s %s\n", month, i, strDay, getHolidayStaffsName(holidayCount));
+                System.out.printf("%d월 %d일 %s %s\n", month, i, strDay, holidayStaff);
                 holidayCount++;
             }
             if (!strDay.equals("토") && !strDay.equals("일") && !hasHoliday) {
-                System.out.printf("%d월 %d일 %s %s\n", month, i, strDay, getWeekDayStaffsName(weekDayCount));
+                System.out.printf("%d월 %d일 %s %s\n", month, i, strDay, weekdayStaff);
                 weekDayCount++;
             }
 
